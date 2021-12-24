@@ -9,7 +9,7 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
-
+const webhook = require('./secret.json').url
 console.log("Message Activity:")
 
 
@@ -27,7 +27,7 @@ socket.broadcast.emit("message", `${name} Telah Masuk Chat`)
 function join() {
 const send = {
 method: 'post',
-url: 'https://discord.com/api/webhooks/923743573277560903/I_DK_XwHDrpBOmhZRE5H0k8SidkUvEqKj7xd0Hcz3MzNkdFoNuBNqh8OtZvdpS9T-pjc',
+url: webhook,
 headers: { "content-type": "application/json" },
 data: {
  "embeds": [
@@ -48,7 +48,7 @@ join()
 async function message(users, msg) {
 	const med = {
     method: 'post',
-    url: 'https://discord.com/api/webhooks/923743573277560903/I_DK_XwHDrpBOmhZRE5H0k8SidkUvEqKj7xd0Hcz3MzNkdFoNuBNqh8OtZvdpS9T-pjc',
+    url: webhook,
     headers: { "content-type": "application/json" },
     data: {
       "content": `${users} » ${msg}`
